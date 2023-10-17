@@ -1,0 +1,28 @@
+% Definizione dell'intervallo desiderato per x, y e t
+f=@(x,y,z)sin(sqrt(x.^2 + y.^2) - 2 * t(i));
+[x,y]=meshgrid(-2*pi:.2:2*pi);
+t = linspace(0, 2*pi, 50);     % Intervallo per t
+
+% Creazione di una griglia di punti (x, y) all'interno dell'intervallo specificato
+[X, Y] = meshgrid(x, y);
+
+% Inizializzazione della matrice per i risultati
+Z = zeros(size(X));
+
+% Calcolo dei valori della funzione f(x, y, t) per ogni combinazione di x, y e t
+for i = 1:length(t)
+    Z = sin(sqrt(X.^2 + Y.^2) - 2 * t(i));
+    
+    % Disegno del grafico 3D per f(x, y, t)
+    figure;
+    surf(X, Y, Z);
+    title(['f(x, y, t) per t = ', num2str(t(i))]);
+    xlabel('x');
+    ylabel('y');
+    zlabel('f(x, y, t)');
+    axis([-2*pi 2*pi -2*pi 2*pi -1 1]); % Imposta gli assi
+    shading interp; % Interpolazione per una superficie più liscia
+    view(3); % Vista 3D
+    colormap('jet'); % Mappa dei colori
+    colorbar; % Aggiungi una barra dei colori
+end
